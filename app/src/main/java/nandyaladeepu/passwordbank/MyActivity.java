@@ -9,13 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.regex.Pattern;
+
 
 public class MyActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_my);
     }
     public void createPassword(View v){
         Button createPassword = (Button)findViewById(R.id.createPassword);
@@ -25,12 +27,15 @@ public class MyActivity extends Activity {
                     Toast.LENGTH_LONG).show();
         }
         else{
-            if(password.getText().toString().length()< 6 ){
-                Toast.makeText(getApplicationContext(),"your password should be a minimum of 6 charecters",
+            if(password.getText().toString().length()> 8 && Pattern.compile("[0-9]").matcher(password.getText().toString()).find() ){
+                Toast.makeText(getApplicationContext(), "your password is" + password.getText().toString(),
                         Toast.LENGTH_LONG).show();
             }
-            Toast.makeText(getApplicationContext(),"your password is"+password.getText().toString(),
-                    Toast.LENGTH_LONG).show();
+            else {
+                Toast.makeText(getApplicationContext(),"your password should be a minimum of 8 charecters and atleast one digit",
+                        Toast.LENGTH_LONG).show();
+
+            }
         }
     }
 
