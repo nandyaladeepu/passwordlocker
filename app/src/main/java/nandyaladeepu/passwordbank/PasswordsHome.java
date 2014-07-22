@@ -7,11 +7,12 @@ import android.view.MenuItem;
 import nandyaladeepu.passwordbank.R;
 
 public class PasswordsHome extends Activity {
-
+    private DataBaseService dataBaseService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passwords_home);
+        dataBaseService = new DataBaseService(getApplicationContext());
     }
 
 
