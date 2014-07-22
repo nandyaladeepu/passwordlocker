@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 
-public class MyActivity extends Activity {
+public class MyActivity extends MyBaseActivity {
     private List<UserBean> userContentList =  new ArrayList<UserBean>();
     private EditText password;
     private Button createPassword;
@@ -26,11 +26,10 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
         dataBaseService = new DataBaseService(getApplicationContext());
 
-         createPassword = (Button)findViewById(R.id.createPassword);
-         password = (EditText)findViewById(R.id.editText);
-         userContentList = dataBaseService.getUsersContent();
-         createPassword.setOnClickListener(button);
-
+        createPassword = (Button)findViewById(R.id.createPassword);
+        password = (EditText)findViewById(R.id.editText);
+        userContentList = dataBaseService.getUsersContent();
+        createPassword.setOnClickListener(button);
         if(userContentList.size()>0){
             createPassword.setText("Enter Password");
         }else{
@@ -97,4 +96,5 @@ public class MyActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

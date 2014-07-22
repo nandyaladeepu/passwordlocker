@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import nandyaladeepu.passwordbank.R;
 
-public class PasswordsHome extends Activity {
+public class PasswordsHome extends MyBaseActivity {
     private DataBaseService dataBaseService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

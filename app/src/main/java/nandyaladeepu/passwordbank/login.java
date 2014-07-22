@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import nandyaladeepu.passwordbank.R;
 
-public class login extends Activity {
+public class login extends MyBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
