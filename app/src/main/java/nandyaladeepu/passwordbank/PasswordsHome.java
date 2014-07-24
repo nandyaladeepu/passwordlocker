@@ -1,37 +1,1 @@
-package nandyaladeepu.passwordbank;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import nandyaladeepu.passwordbank.R;
-
-public class PasswordsHome extends MyBaseActivity {
-    private DataBaseService dataBaseService;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_passwords_home);
-        dataBaseService = new DataBaseService(getApplicationContext());
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.passwords_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-}
+package nandyaladeepu.passwordbank;import android.app.Activity;import android.app.AlertDialog;import android.content.DialogInterface;import android.content.Intent;import android.os.AsyncTask;import android.os.Bundle;import android.preference.DialogPreference;import android.view.Menu;import android.view.MenuItem;import android.view.View;import android.widget.Button;import android.widget.EditText;import android.widget.ListView;import java.util.List;import java.util.Timer;import java.util.TimerTask;import android.util.Log;import adapters.PasswordsAdapter;import nandyaladeepu.passwordbank.R;public class PasswordsHome extends MyBaseActivity implements View.OnClickListener{    private ListView mlistView;    private Button addAccount;    private PasswordsAdapter pAdapter;    View v;    static protected MyTimerTask myTimerTask;    static protected Timer t;    @Override    protected void onCreate(Bundle savedInstanceState) {        super.onCreate(savedInstanceState);        setContentView(R.layout.activity_passwords_home);        pAdapter = new PasswordsAdapter(this);        mlistView = (ListView)findViewById(R.id.listView);        addAccount = (Button)findViewById(R.id.addBtn);        addAccount.setOnClickListener(this);        mlistView.setAdapter(pAdapter);    }    @Override    protected void onResume() {        super.onResume();        updatePasswordList();        t = new Timer();        myTimerTask = new MyTimerTask();        t.schedule(myTimerTask, 30000);    }    @Override    public void onUserInteraction() {        if(passApp.prefEdit.getBooleanPreference(Constants.IS_LOGGED_IN)) {            t = new Timer();            myTimerTask = new MyTimerTask();            t.schedule(myTimerTask, 30000);        }    }    class MyTimerTask extends TimerTask {        @Override        public void run() {            passApp.prefEdit.writeBooleanPreference(Constants.IS_LOGGED_IN, false);            runOnUiThread(new Runnable(){                @Override                public void run() {                    PasswordsHome.this.finish();                    startActivity(new Intent(PasswordsHome.this, StartActivity.class));                }            });        }    }    @Override    public boolean onCreateOptionsMenu(Menu menu) {        // Inflate the menu; this adds items to the action bar if it is present.        getMenuInflater().inflate(R.menu.passwords_home, menu);        return true;    }    @Override    public boolean onOptionsItemSelected(MenuItem item) {        // Handle action bar item clicks here. The action bar will        // automatically handle clicks on the Home/Up button, so long        // as you specify a parent activity in AndroidManifest.xml.        int id = item.getItemId();        if (id == R.id.action_settings) {            return true;        }        return super.onOptionsItemSelected(item);    }    @Override    public void onClick(View view) {        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);        v = getLayoutInflater().inflate(R.layout.add_account, null);        builder1.setView(v);        builder1.setPositiveButton("Create", new DialogInterface.OnClickListener() {            @Override            public void onClick(final DialogInterface dialogInterface, int i) {                new AsyncTask<Void, Void, Void>(){                    @Override                    protected Void doInBackground(Void... voids) {                        String accountName = ((EditText)v.findViewById(R.id.acc_name)).getText().toString();                        String userName = ((EditText)v.findViewById(R.id.username)).getText().toString();                        String password = ((EditText)v.findViewById(R.id.password)).getText().toString();                        UserBean uBean = new UserBean();                        uBean.setAccountname(accountName);                        uBean.setName(userName);                        uBean.setPassword(password);                        dbConn.insertAccountData(uBean);                        return null;                    }                    @Override                    protected void onPostExecute(Void v) {                        super.onPostExecute(v);                        updatePasswordList();                    }                }.execute();                dialogInterface.dismiss();            }        });        builder1.create().show();    }    private void updatePasswordList(){        new AsyncTask<Void,Void,List<UserBean>>(){            @Override            protected List<UserBean> doInBackground(Void... voids) {                return dbConn.getUsersContent();            }            @Override            protected void onPostExecute(List<UserBean> userBeans) {                pAdapter.setUBeans(userBeans);                pAdapter.notifyDataSetChanged();            }        }.execute();    }}

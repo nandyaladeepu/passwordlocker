@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PasswordBank.iml" filepath="$PROJECT_DIR$/PasswordBank.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/password_locker_2.iml" filepath="$PROJECT_DIR$/password_locker_2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/passwordlocker.iml" filepath="$PROJECT_DIR$/passwordlocker.iml" />
     </modules>
   </component>
 </project>

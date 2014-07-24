@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Account name"
+        android:id="@+id/label_2" />
+
+    <EditText
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:hint="Account name"
+        android:ems="10"
+        android:id="@+id/acc_name" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="User name"
+        android:id="@+id/label_3" />
+
+    <EditText
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:hint="User name or email"
+        android:ems="10"
+        android:id="@+id/username" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Password"
+        android:id="@+id/label_4" />
+
+    <EditText
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:password="true"
+        android:hint="@string/password"
+        android:ems="10"
+        android:id="@+id/password" />
+
+</LinearLayout>

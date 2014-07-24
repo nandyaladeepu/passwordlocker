@@ -13,5 +13,9 @@
     <string name="login">Login</string>
     <string name="passkey">Enter Password</string>
     <string name="addAccount">Add Account</string>
+    <string name="welcome_string">Hi welcome to password locker</string>
+    <string name="password">Your password</string>
+    <string name="password_confirmation">Password confirmation</string>
+    <string name="signup">Signup</string>
 
 </resources>

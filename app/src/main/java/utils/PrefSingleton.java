@@ -43,7 +43,7 @@ public class PrefSingleton{
     }
 
     public boolean getBooleanPreference(String key){
-        return mMyPreferences.getBoolean(key, true);
+        return mMyPreferences.getBoolean(key, false);
     }
 }
 

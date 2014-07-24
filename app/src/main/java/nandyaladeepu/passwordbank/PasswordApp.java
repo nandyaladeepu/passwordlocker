@@ -17,14 +17,8 @@ public class PasswordApp extends Application{
         dbConn = new DataBaseService(this);
     }
 
-    static boolean isLoggedIn(){
-        // Use Sharedpreferences
-        return true;
-    }
-
-    static boolean isFirstTime(){
-        // Use Sharedpreferences
-        return true;
+    public boolean isLoggedIn(){
+        return prefEdit.getBooleanPreference(Constants.IS_LOGGED_IN);
     }
 
     DataBaseService getDatabase(){
@@ -32,5 +26,8 @@ public class PasswordApp extends Application{
             dbConn= new DataBaseService(this);
         }
         return dbConn;
+    }
+    public boolean noMasterPasswd(){
+        return (prefEdit.getPreference(Constants.PASSWORD) == null);
     }
 }

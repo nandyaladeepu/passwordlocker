@@ -12,19 +12,19 @@ public class StartActivity extends MyBaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
     @Override
     protected void onResume() {
         super.onResume();
-        if(passApp.isFirstTime()){
+        finish();
+        if(passApp.noMasterPasswd()){
             startActivity(new Intent(this, SignupActivity.class));
+            return;
         }
         if(passApp.isLoggedIn()){
-            // open activity logged
             startActivity(new Intent(this, PasswordsHome.class));
+            return;
         }else{
-            // signup activity
-            startActivity(new Intent(this, login.class));
+            startActivity(new Intent(this, LoginActivity.class));
         }
     }
 }
